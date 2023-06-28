@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        .form-container {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-container form {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+        }
+
+        #registration-details {
+            flex: 1;
+            padding-left: 20px;
+            border-left: 1px solid #ccc;
+        }
+
+        #registration-details img {
+            max-width: 200px;
+            margin-top: 10px;
+        }
+
+        /* Updated CSS */
+        .form-container label.checkbox {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+
+        .form-container label.checkbox input {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="registration-form">
+            <h2>Registration Form</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="image-link">Image Link:</label>
+            <input type="text" id="image-link" required>
+
+            <label for="website">Website:</label>
+            <input type="url" id="website">
+
+            <label>Skills:</label>
+            <div>
+                <label for="html" class="checkbox">
+                    <input type="checkbox" id="html" value="HTML">
+                    HTML
+                </label>
+            </div>
+            <div>
+                <label for="css" class="checkbox">
+                    <input type="checkbox" id="css" value="CSS">
+                    CSS
+                </label>
+            </div>
+            <div>
+                <label for="javascript" class="checkbox">
+                    <input type="checkbox" id="javascript" value="JavaScript">
+                    JavaScript
+                </label>
+            </div>
+            <div>
+                <label for="python" class="checkbox">
+                    <input type="checkbox" id="python" value="Python">
+                    Python
+                </label>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <div id="registration-details"></div>
+    </div>
+
+    <script>
+        document.getElementById("registration-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get form input values
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var gender = document.getElementById("gender").value;
+            var imageLink = document.getElementById("image-link").value;
+            var website = document.getElementById("website").value;
+            
+            // Get selected skills
+            var skills = [];
+            var skillsCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            skillsCheckboxes.forEach(function(skill) {
+                skills.push(skill.value);
+            });
+            
+            // Display registration details to the side
+            var registrationDetails = document.getElementById("registration-details");
+            registrationDetails.innerHTML = "<h3>Registration Details:</h3>" +
+                "<p><strong>Name:</strong> " + name + "</p>" +
+                "<p><strong>Email:</strong> " + email + "</p>" +
+                "<p><strong>Password:</strong> " + password + "</p>" +
+                "<p><strong>Gender:</strong> " + gender + "</p>" +
+                "<p><strong>Image:</strong></p>" +
+                "<img src='" + imageLink + "' alt='Profile Image'>" +
+                "<p><strong>Website:</strong> " + (website ? "<a href='" + website + "'>" + website + "</a>" : "N/A") + "</p>" +
+                "<p><strong>Skills:</strong> " + skills.join(", ") + "</p>";
+        });
+    </script>
+</body>
+</html>
